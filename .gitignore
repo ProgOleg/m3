@@ -158,5 +158,9 @@ Thumbs.db
 # profiling data
 .prof
 
+# etc...
 
+/comments_photo/
 # End of https://www.toptal.com/developers/gitignore/api/django
+/m3/.env
+/product_image/
