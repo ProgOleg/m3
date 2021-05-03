@@ -304,7 +304,7 @@ $(function () {
 				$(".popup-window-cont").removeClass("hidden");
 				$(".popup-window-thank").removeClass("active");
 				$("#form-callback")[0].reset();
-				$("#form-reviews")[0].reset();
+				$("#form-comments")[0].reset();
 				$("#form-subscribe")[0].reset();
 			},
 		});
@@ -364,38 +364,6 @@ $('#form-callback').submit(function(event) {
 	}
 	});
 
-// $('#review-form').submit(function(event) {
-// 		event.preventDefault();
-//
-// 		var stars_container = $('#rating_feedback_container').children('span').children('span').text()
-// 		if (stars_container == '-') {stars_container = 0}
-// 		var data = $(this).serializeArray()
-// 		data[3]['name'] = 'rating'
-// 		data[3]['value'] = stars_container
-// 		var url = this.action
-// 		//$.post(url,data, function(data) {})
-// 		$.ajaxSetup({
-// 		  url: url,
-// 		  type: 'POST',
-// 		  dataType: 'json',
-// 		  beforeSend: function(){},
-// 		  error: function(req, text, error){},
-// 		  complete: function(){}
-// 		});
-// 	    var $that = $(this),
-// 	    formData = new FormData($that.get(0));
-// 	    formData.append('rating', stars_container)
-// 	    $.ajax({
-// 	      	contentType: false,
-// 	      	processData: false,
-// 	      	data: formData,
-// 	      	success: function(json){
-// 	        	if(json){
-// 	        	}
-// 	      	}
-// 	    });
-//
-// 	});
 
 $('#form-comments').submit(function(event) {
 	event.preventDefault();
@@ -424,4 +392,13 @@ $('#form-comments').submit(function(event) {
 	        	}
 	      	}
 	    });
+	});
+
+
+$('#form-subscribe').submit(function(event) {
+	event.preventDefault();
+	let data = $(this).serializeArray()
+	let url = this.action
+	$.post(url, data, function(data) {})
+
 	});

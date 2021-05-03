@@ -2290,3 +2290,5 @@ textarea.form-control { height: 226px; resize: none; padding: 23px 32px; -webkit
   .box-form_reviews .btn-send { min-width: 270px; } }
 
 /*# sourceMappingURL=style.css.map */
+
+.hide-stock { pointer-events: none; }

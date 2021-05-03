@@ -1,4 +1,4 @@
-from app.models import Orders, Comments
+from app.models import Orders, Comments, Subscribe
 from django import forms
 
 
@@ -17,3 +17,9 @@ class CommentsForm(forms.ModelForm):
         if self.cleaned_data['rating']:
             self.cleaned_data['rating'] = int(self.cleaned_data['rating'])
         return self.cleaned_data['rating']
+
+
+class SubscribeForm(forms.ModelForm):
+    class Meta:
+        model = Subscribe
+        fields = ["email"]
