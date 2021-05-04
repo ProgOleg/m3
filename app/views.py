@@ -9,6 +9,7 @@ from app.forms import *
 # from django.db.models import Prefetch, F
 import requests
 from m3 import settings
+import datetime
 
 
 class IndexPage(View):
@@ -60,6 +61,7 @@ def oder_approval(request):
             data = data.save()
             resp = 200
             date = data.date_created
+            date = date + datetime.timedelta(hours=3)
             date = date.strftime("%Y-%m-%d %H:%M")
             url = f"https://api.telegram.org/bot{settings.T_BOT_TOKEN}/sendMessage"
             headers = {'Content-Type': 'application/json'}
