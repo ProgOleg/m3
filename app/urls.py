@@ -1,5 +1,5 @@
 from django.urls import path
-from django.conf import settings
+from django.conf import settings as settings_
 from django.conf.urls.static import static
 
 from app.views import *
@@ -10,4 +10,4 @@ urlpatterns = [
     path("comments_approval/", comments_approval, name="comments_approval_url"),
     path("subscribe/", subscribe, name="subscribe_url")
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings_.MEDIA_URL, document_root=settings_.MEDIA_ROOT)

@@ -1,12 +1,14 @@
 from django.views.generic import View
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, FileResponse
-from django.template import loader, Context
+from django.shortcuts import render # redirect
+from django.http import HttpResponse # JsonResponse, HttpResponseRedirect, FileResponse
+# from django.template import loader, Context
 from app.models import *
 from app.forms import *
 # from app.utils import *
-from django.conf import settings
-from django.db.models import Prefetch, F
+# from django.conf import settings
+# from django.db.models import Prefetch, F
+import requests
+from m3 import settings
 
 
 class IndexPage(View):
@@ -55,8 +57,20 @@ def oder_approval(request):
     if request.is_ajax() and request.method == "POST":
         data = OrdersForm(request.POST)
         if data.is_valid():
-            data.save()
+            data = data.save()
             resp = 200
+            date = data.date_created
+            date = date.strftime("%Y-%m-%d %H:%M")
+            url = f"https://api.telegram.org/bot{settings.T_BOT_TOKEN}/sendMessage"
+            headers = {'Content-Type': 'application/json'}
+            text = f"""
+Заявка №-{data.id}
+Имя: {data.name}
+Телефон: {data.t_number}
+Дата создания: {date}
+"""
+            json_ = {"text": text, "chat_id": settings.T_ADMIN_CHAT_ID}
+            requests.post(url, headers=headers, json=json_)
     return HttpResponse(status=resp)
 
 

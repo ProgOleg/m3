@@ -162,3 +162,9 @@ if not DEBUG:
             },
         },
     }
+
+T_BOT_TOKEN = os.environ.get("T_BOT_TOKEN")
+if DEBUG:
+    T_ADMIN_CHAT_ID = "363531967"
+else:
+    T_ADMIN_CHAT_ID = os.environ.get("T_ADMIN_CHAT_ID", "363531967")

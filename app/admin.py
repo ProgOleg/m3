@@ -6,25 +6,25 @@ from app.admin_mixin import MultiDBModelAdmin
 class OrdersAmdin(admin.ModelAdmin):
     model = Orders
 
-    list_display = ["name", "t_number", "date_created"]
+    list_display = ["id", "name", "t_number", "date_created"]
 
 
 class ProductsAmdin(admin.ModelAdmin):
     model = Products
 
-    list_display = ["title", "description", "image", "is_active"]
+    list_display = ["id", "title", "description", "image", "is_active"]
 
 
 class CommentsAmdin(admin.ModelAdmin):
     model = Comments
 
-    list_display = ["name", "description", "photo", "date_created", "is_active", "rating"]
+    list_display = ["id", "name", "description", "photo", "date_created", "is_active", "rating"]
 
 
 class SubscribeAmdin(admin.ModelAdmin):
     model = Subscribe
 
-    list_display = ["email", "date_created"]
+    list_display = ["id", "email", "date_created"]
 
 
 class StockInline(admin.StackedInline):
