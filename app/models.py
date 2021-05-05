@@ -15,8 +15,8 @@ class Products(models.Model):
 
 class Orders(models.Model):
 
-    name = models.CharField("Заголовок", max_length=255, blank=True)
-    t_number = models.CharField("Заголовок", max_length=20, blank=True)
+    name = models.CharField("Имя", max_length=255, blank=True)
+    t_number = models.CharField("Номер телефона", max_length=20, blank=True)
     date_created = models.DateTimeField("Дата создания", auto_now_add=True)
 
     class Meta:
@@ -26,7 +26,7 @@ class Orders(models.Model):
 
 class Comments(models.Model):
 
-    name = models.CharField("Заголовок", max_length=255, blank=True)
+    name = models.CharField("Имя", max_length=255, blank=True)
     description = models.TextField("Описание", max_length=10000, blank=True)
     photo = models.ImageField("Изображение", upload_to="comments_photo/", blank=True)
     date_created = models.DateTimeField("Дата создания", auto_now_add=True)
