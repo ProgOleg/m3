@@ -582,7 +582,7 @@
 														<i class="icon-port"></i>
 														<div class="map-tooltip__col">
 															<div class="map-tooltip__address">
-																{{ ports.odessa.0.address }}
+																{{ ports.odessa.1.address }}
 															</div>
 														</div>
 													</div>
@@ -1496,7 +1496,7 @@
 													</div>
 												</div>
 											</li>
-											<li class="stock-list__item {% if not stock.lviv.1.is_active %}hide-stock{% endif %}" id="lutsk-stock-1" data-scroll data-aos-delay="900">
+											<li class="stock-list__item {% if not stock.lutsk.0.is_active %}hide-stock{% endif %}" id="lutsk-stock-1" data-scroll data-aos-delay="900">
 												<div class="stock-list__link"><i class="icon-house"></i></div>
 												<div class="map-tooltip map-tooltip-stock">
 													<div class="map-tooltip__row">
@@ -1505,14 +1505,14 @@
 														</div>
 														<div class="map-tooltip__col">
 															<div class="map-tooltip__address">
-																{{ stock.lviv.1.address }}
+																{{ stock.lutsk.0.address }}
 															</div>
 														</div>
 													</div>
 													<div class="map-tooltip__btns">
 														<a href="#" class="map-tooltip__close"></a>
-														<a href="tel:{{ stock.lviv.1.phone }}" class="map-tooltip__phone"><i class="icon-phone"></i>{{ stock.lviv.1.phone }}</a>
-														<a href="{{ stock.lviv.1.map_link }}" target="_blank" class="btn">Показать на карте</a>
+														<a href="tel:{{ stock.lutsk.0.phone }}" class="map-tooltip__phone"><i class="icon-phone"></i>{{ stock.lutsk.0.phone }}</a>
+														<a href="{{ stock.lutsk.0.map_link }}" target="_blank" class="btn">Показать на карте</a>
 													</div>
 												</div>
 											</li>
