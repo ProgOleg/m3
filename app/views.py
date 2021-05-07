@@ -17,6 +17,8 @@ class IndexPage(View):
     def get(self, request):
         products = Products.objects.filter(is_active=True)
         comments = Comments.objects.filter(is_active=True)
+        whole_sale = WholeSale.objects.filter(is_active=True)
+        retail_sales = RetailSales.objects.filter(is_active=True)
         regions = Region.objects.all().values("descripton", "is_active")
         ports = Port.objects.all().values("address", "phone", "region", "is_active", "map_link")
         stocks = Stock.objects.all().values("address", "phone", "region", "is_active", "map_link")
@@ -47,7 +49,9 @@ class IndexPage(View):
             "comments": comments,
             "regions": regions_accum,
             "ports": port_accum,
-            "stock": stock_accum
+            "stock": stock_accum,
+            "whole_sale": whole_sale,
+            "retail_sales": retail_sales,
         }
 
         return render(request, 'app/index.html', context)

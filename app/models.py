@@ -1,5 +1,5 @@
 from django.db import models
-
+import datetime
 
 class Products(models.Model):
 
@@ -14,14 +14,31 @@ class Products(models.Model):
 
 
 class Orders(models.Model):
+    TYPE = [
+        ('new', 'Новая'), ('processing', 'В обработке'),
+        ('success', 'Успех'), ('refusing', 'Отказ')
+    ]
 
     name = models.CharField("Имя", max_length=255, blank=True)
     t_number = models.CharField("Номер телефона", max_length=20, blank=True)
     date_created = models.DateTimeField("Дата создания", auto_now_add=True)
 
+    status = models.CharField("Статус заявки", max_length=30, choices=TYPE, default='new')
+    date_ready = models.DateTimeField("Дата готовности", default=None, null=True, blank=True)
+    note = models.CharField(verbose_name="Заметка", null=True, default=None, max_length=5000, blank=True)
+    geography = models.CharField(verbose_name="География", null=True, default=None, max_length=1024, blank=True)
+
+    def save(self, *args, **kwargs):
+        if self.status == 'success' or self.status == 'refusing':
+            self.date_ready = datetime.datetime.now()
+        return super(self.__class__, self).save(*args, **kwargs)
+
     class Meta:
         verbose_name = "Заявка"
         verbose_name_plural = "Заявки"
+
+    def __str__(self):
+        return f"{self.name}, {self.t_number}, {self.status}"
 
 
 class Comments(models.Model):
@@ -98,10 +115,28 @@ class Port(models.Model):
         return f"Область: {self.region.name}"
 
 
+class SalesChangeContent(models.Model):
+    class Meta:
+        abstract = True
+
+    title = models.CharField("Заголовок", max_length=255)
+    subtitle = models.TextField("Подзаголовок", max_length=2000)
+    price = models.CharField("Цена", max_length=255)
+    is_active = models.BooleanField("Активно на странице", default=False, blank=True)
 
 
+class WholeSale(SalesChangeContent):
+
+    class Meta:
+        verbose_name = "Оптовые продажи"
+        verbose_name_plural = "Оптовые продажи"
 
 
+class RetailSales(SalesChangeContent):
+
+    class Meta:
+        verbose_name = "Розничные продажи"
+        verbose_name_plural = "Розничные продажи"
 
 
 

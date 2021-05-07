@@ -6,7 +6,8 @@ from app.admin_mixin import MultiDBModelAdmin
 class OrdersAmdin(admin.ModelAdmin):
     model = Orders
 
-    list_display = ["id", "name", "t_number", "date_created"]
+    list_display = ["id", "name", "t_number", "date_created", "status", "date_ready", "note", "geography"]
+    list_editable = ("status", "note", "geography")
 
 
 class ProductsAmdin(admin.ModelAdmin):
@@ -59,6 +60,17 @@ class RegionAdmin(MultiDBModelAdmin):
     inlines = [StockInline, PortInline]
 
 
+class WholeSaleAdmin(MultiDBModelAdmin):
+    model = WholeSale
+    list_display = ("id", "title", "subtitle", "price", "is_active")
+
+
+class RetailSalesAdmin(MultiDBModelAdmin):
+    model = RetailSales
+    list_display = ("id", "title", "subtitle", "price", "is_active")
+
+
+
 admin.site.register(Region, RegionAdmin)
 
 title = "M3 Opt"
@@ -67,6 +79,8 @@ admin.site.site_header = title
 admin.site.index_title = "Админ панель M3 Opt"
 
 
+admin.site.register(WholeSale, WholeSaleAdmin)
+admin.site.register(RetailSales, RetailSalesAdmin)
 admin.site.register(Orders, OrdersAmdin)
 admin.site.register(Products, ProductsAmdin)
 admin.site.register(Comments, CommentsAmdin)

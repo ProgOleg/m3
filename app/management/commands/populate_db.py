@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from app.models import Port, Stock, Region
+from app.models import Port, Stock, Region, WholeSale, RetailSales
 
 
 class Command(BaseCommand):
@@ -35,16 +35,36 @@ class Command(BaseCommand):
             }
         return regions_keys
 
+    def add_arguments(self, parser):
+        # Positional arguments
+        # parser.add_argument('poll_ids', nargs='+', type=int)
+
+        # Named (optional) arguments
+        parser.add_argument(
+            '--sales_section',
+            action='store_true',
+            help='Populate db WholeSale and RetailSales models',
+        )
+        parser.add_argument(
+            '--regions',
+            action='store_true',
+            help='Populate db WholeSale and RetailSales models',
+        )
+
     def handle(self, *args, **options):
-        regions_keys = self._regions()
-        for descripton, details in regions_keys.items():
-            reg = Region.objects.create(name=details.get("name"), descripton=descripton, is_active=False)
-            stock_count = details.get("stock")
-            port_count = details.get("port")
-            if stock_count:
-                for el in range(stock_count):
-                    Stock.objects.create(region=reg)
-            if port_count:
-                for el in range(port_count):
-                    Port.objects.create(region=reg)
+        if options.get("sales_section"):
+            RetailSales.objects.create()
+            WholeSale.objects.create()
+        elif options.get("regions"):
+            regions_keys = self._regions()
+            for descripton, details in regions_keys.items():
+                reg = Region.objects.create(name=details.get("name"), descripton=descripton, is_active=False)
+                stock_count = details.get("stock")
+                port_count = details.get("port")
+                if stock_count:
+                    for el in range(stock_count):
+                        Stock.objects.create(region=reg)
+                if port_count:
+                    for el in range(port_count):
+                        Port.objects.create(region=reg)
         print("Created")
