@@ -346,6 +346,7 @@ $(window).bind("resize", handler);
 
 $('#form-callback').submit(function(event) {
 	event.preventDefault();
+	fbq('track', 'Lead');
 	let data = $(this).serializeArray()
 	if (data[0].value == "" || data[1].value == ""){}
 	else{
@@ -367,6 +368,7 @@ $('#form-callback').submit(function(event) {
 
 $('#form-comments').submit(function(event) {
 	event.preventDefault();
+	fbq('track', 'Lead');
 	// const data = $(this).serializeArray()
 	const rating = $(".icon-star.active").length
 	// data.push({"name": "rating", "value": rating})
@@ -397,6 +399,7 @@ $('#form-comments').submit(function(event) {
 
 $('#form-subscribe').submit(function(event) {
 	event.preventDefault();
+	fbq('track', 'Lead');
 	let data = $(this).serializeArray()
 	let url = this.action
 	$.post(url, data, function(data) {})
